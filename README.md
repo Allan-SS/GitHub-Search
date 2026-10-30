@@ -1,70 +1,74 @@
-# Getting Started with Create React App
+# GitHub Search 🔎
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Aplicação web em React para buscar um usuário do GitHub pelo nome e visualizar seu perfil e seus repositórios públicos, consumindo a API REST oficial do GitHub.
 
-## Available Scripts
+<!-- Adicione aqui um print ou GIF da aplicação, por exemplo: ![Demo](./docs/demo.gif) -->
 
-In the project directory, you can run:
+**Demo:** _adicione o link do deploy aqui_
 
-### `npm start`
+## Funcionalidades
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+- Busca de usuário do GitHub por nome de usuário (login)
+- Exibição do perfil: foto, nome, login, bio, localização, número de repositórios públicos e de seguidores
+- Listagem dos repositórios públicos em cards, com nome (link para o repositório no GitHub), descrição e quantidade de estrelas
+- Validação do campo de busca (não aceita texto vazio ou só com espaços)
+- Página de erro "User Not Found" quando o usuário não existe e para rotas inexistentes
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+## Tecnologias
 
-### `npm test`
+- [React](https://react.dev) 18
+- [React Router](https://reactrouter.com) 6 (rotas `/`, `/list` e página de erro)
+- [Styled-Components](https://styled-components.com) para estilização
+- [Axios](https://axios-http.com) para requisições HTTP
+- Context API para estado global
+- Create React App (`react-scripts`)
+- [GitHub REST API](https://docs.github.com/en/rest)
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+## Arquitetura
 
-### `npm run build`
+```
+src/
+├── components/      # Header e CardProjects (componentes reutilizáveis)
+├── pages/           # HomePage, ListPage e ErrorPage
+├── service/         # requests.js: chamadas à API (getProfile, getRepos)
+├── global/          # GlobalState e GlobalStateContext (Context API)
+├── constants/       # URL base da API, cores e regex de validação
+└── App.js           # Definição das rotas
+```
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+- **Separação de responsabilidades:** chamadas à API ficam isoladas em `service/`, sem lógica de interface.
+- **Estado global** com Context API (`searchText`, `user`, `repos`, `errorMessage`).
+- **Tratamento de erro** nas requisições, redirecionando para a página de erro quando o usuário não é encontrado.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+## Como rodar localmente
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Pré-requisitos: [Node.js](https://nodejs.org) (versão LTS) e npm.
 
-### `npm run eject`
+```bash
+git clone https://github.com/Allan-SS/GitHub-Search.git
+cd GitHub-Search
+npm install
+npm start
+```
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+A aplicação abre em [http://localhost:3000](http://localhost:3000).
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+### Outros scripts
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+| Comando | O que faz |
+| --- | --- |
+| `npm start` | Inicia o servidor de desenvolvimento |
+| `npm run build` | Gera a versão de produção na pasta `build` |
+| `npm test` | Executa os testes |
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+## Limitações conhecidas e próximos passos
 
-## Learn More
+- A API do GitHub limita requisições sem autenticação; em uso intenso pode retornar erro de limite de taxa.
+- Listar apenas a primeira página de repositórios (padrão da API); paginação seria uma evolução natural.
+- Migrar para TypeScript e adicionar testes dos componentes e dos serviços.
+- Indicadores de carregamento (loading) durante as requisições.
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+## Autor
 
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+**Allan de Sousa Silva**
+[LinkedIn](https://www.linkedin.com/in/allan-sousa-silva/) · [GitHub](https://github.com/Allan-SS)
