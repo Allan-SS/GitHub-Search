@@ -2,10 +2,6 @@
 
 Aplicação web em React para buscar um usuário do GitHub pelo nome e visualizar seu perfil e seus repositórios públicos, consumindo a API REST oficial do GitHub.
 
-<!-- Adicione aqui um print ou GIF da aplicação, por exemplo: ![Demo](./docs/demo.gif) -->
-
-**Demo:** _adicione o link do deploy aqui_
-
 ## Funcionalidades
 
 - Busca de usuário do GitHub por nome de usuário (login)
